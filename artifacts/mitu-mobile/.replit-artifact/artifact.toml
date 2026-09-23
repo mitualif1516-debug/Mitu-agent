@@ -1,0 +1,24 @@
+kind = "mobile"
+previewPath = "/mobile/"
+title = "Mitu Mobile Assistant"
+description = "A mobile companion for Mitu with a voice-first home surface, translation workflow, air gesture controls, and clear free-tier limits that sync with the Mitu control room."
+version = "1.0.0"
+id = "artifacts/mitu-mobile"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/mobile/" ]
+localPort = 19608
+
+[services.development]
+run = "pnpm --filter @workspace/mitu-mobile run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mitu-mobile", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/mitu-mobile", "run", "serve" ]
+
+[services.env]
+PORT = "19608"
+BASE_PATH = "/mobile/"

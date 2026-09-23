@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Mitu Control Room"
+description = "A dark operations dashboard for Mitu's assistant ecosystem, with subscription controls, remote limits, usage analytics, and recent assistant activity for admins."
+version = "1.0.0"
+id = "artifacts/mitu-dashboard"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22826
+
+[services.development]
+run = "pnpm --filter @workspace/mitu-dashboard run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mitu-dashboard", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mitu-dashboard/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22826"
+BASE_PATH = "/"

@@ -1,6 +1,6 @@
-# [Project name]
+# Mitu AI Assistant
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Mitu is a Bengali-first hands-free assistant ecosystem with a mobile companion and an admin control room for usage, subscriptions, and remote limits.
 
 ## Run & Operate
 
@@ -22,23 +22,35 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `lib/api-spec/openapi.yaml` — source of truth for dashboard, mobile usage, translation, and remote-config contracts.
+- `lib/db/src/schema/mitu.ts` — Drizzle models for users, activity, usage events, and remote config.
+- `artifacts/api-server/src/routes/` — Express handlers for dashboard, config, and mobile endpoints.
+- `artifacts/mitu-dashboard/` — responsive admin control room at `/`.
+- `artifacts/mitu-mobile/` — Expo companion app at `/mobile/` and Expo Go.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The API contract is OpenAPI-first; generated React Query hooks are shared by the web dashboard and Expo app.
+- The first build uses PostgreSQL-backed Mitu tables with a small seed set so the dashboards are useful immediately.
+- Mitu's fixed wake word is treated as product configuration, not a user-editable preference.
+- Device-sensitive capabilities are surfaced as explicit readiness states in Expo; wake-word detection, MediaPipe, and AccessibilityService require a native Android build and real-device permission flow.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Admins can monitor total users, free/Pro mix, activity, API health, and usage telemetry.
+- Admins can search users, change plans, and publish daily action, lock-screen, gesture, translation, and auto-send limits.
+- Mobile users get a Mitu orb home surface, synced free-tier limits, a translation preview, gesture mappings, and WhatsApp automation safety states.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Keep the Mitu identity fixed and use the dark cyberpunk palette requested by the user.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Run `pnpm --filter @workspace/api-spec run codegen` after changing `lib/api-spec/openapi.yaml`.
+- Run `pnpm --filter @workspace/db run push` after changing the Drizzle schema.
+- The API is routed through `/api`; Expo uses the injected `EXPO_PUBLIC_DOMAIN` to reach the same service.
+- Replit can preview the Expo app, but the Android-native services are intentionally not claimed as complete until a native build and permissions are tested on device.
 
 ## Pointers
 
