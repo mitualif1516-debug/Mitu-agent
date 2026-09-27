@@ -47,3 +47,24 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Android Studio / Gradle export
+/android/.gradle/
+/android/build/
+/android/app/build/
+/android/.idea/
+/android/local.properties
+/android/*.iml
+/android/app/*.iml
+/android/app/src/main/assets/*.keystore
+
+# Native build outputs
+*.apk
+*.aab
+*.apks
+*.hprof
+
+# Backend export build outputs
+/backend/**/dist/
+/backend/**/.tsbuildinfo
+/backend/**/node_modules/

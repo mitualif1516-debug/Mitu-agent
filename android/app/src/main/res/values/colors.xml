@@ -1,0 +1,8 @@
+<resources>
+    <color name="mitu_background">#0A0D14</color>
+    <color name="mitu_surface">#141A29</color>
+    <color name="mitu_primary">#A855F7</color>
+    <color name="mitu_accent">#06B6D4</color>
+    <color name="mitu_foreground">#F5F7FF</color>
+    <color name="mitu_muted">#8A94AB</color>
+</resources>

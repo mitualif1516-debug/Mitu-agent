@@ -1,0 +1,77 @@
+plugins {
+    id "com.android.application"
+    id "org.jetbrains.kotlin.android"
+}
+
+def configuredApiBaseUrl = (
+        project.findProperty("mituApiBaseUrl")
+                ?: System.getenv("MITU_API_BASE_URL")
+                ?: "https://api.mitu.app"
+).toString().replace("\"", "\\\"")
+
+android {
+    namespace "com.mitu.assistant"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.mitu.assistant"
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName "1.0.0"
+
+        buildConfigField "String", "MITU_API_BASE_URL", "\"${configuredApiBaseUrl}\""
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+
+    packaging {
+        resources {
+            excludes += ["/META-INF/{AL2.0,LGPL2.1}", "META-INF/DEPENDENCIES"]
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:1.15.0"
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "androidx.activity:activity-ktx:1.10.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
+    implementation "androidx.lifecycle:lifecycle-service:2.8.7"
+    implementation "com.google.android.material:material:1.12.0"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
+
+    implementation "androidx.camera:camera-camera2:1.4.2"
+    implementation "androidx.camera:camera-lifecycle:1.4.2"
+    implementation "androidx.camera:camera-view:1.4.2"
+    implementation "com.google.mediapipe:tasks-vision:0.10.35"
+    implementation "com.google.mlkit:translate:17.0.3"
+}

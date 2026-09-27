@@ -1,0 +1,11 @@
+{
+  "name": "mitu-backend-export",
+  "private": true,
+  "version": "1.0.0",
+  "description": "GitHub export boundary for the Mitu API server and admin dashboard.",
+  "scripts": {
+    "typecheck": "pnpm --dir .. run typecheck",
+    "build:api": "pnpm --dir .. --filter @workspace/api-server run build",
+    "build:dashboard": "pnpm --dir .. --filter @workspace/mitu-dashboard run build"
+  }
+}

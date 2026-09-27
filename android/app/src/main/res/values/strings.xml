@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Mitu</string>
+    <string name="accessibility_service_label">Mitu Assistant Automation</string>
+    <string name="accessibility_service_description">Lets Mitu navigate system controls and WhatsApp after you explicitly enable the service.</string>
+    <string name="foreground_service_channel_name">Mitu assistant</string>
+    <string name="foreground_service_channel_description">Background wake word and hand gesture processing.</string>
+    <string name="foreground_service_notification">Mitu is ready for “Mitu” or “মিতু”.</string>
+</resources>

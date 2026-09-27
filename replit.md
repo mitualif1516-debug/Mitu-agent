@@ -27,6 +27,8 @@ Mitu is a Bengali-first hands-free assistant ecosystem with a mobile companion a
 - `artifacts/api-server/src/routes/` — Express handlers for dashboard, config, and mobile endpoints.
 - `artifacts/mitu-dashboard/` — responsive admin control room at `/`.
 - `artifacts/mitu-mobile/` — Expo companion app at `/mobile/` and Expo Go.
+- `android/` — standalone Android Studio project with Kotlin native services and package `com.mitu.assistant`.
+- `backend/` — GitHub-facing export boundary containing the API server, admin dashboard, OpenAPI, generated clients, validators, and database package.
 
 ## Architecture decisions
 
@@ -34,6 +36,7 @@ Mitu is a Bengali-first hands-free assistant ecosystem with a mobile companion a
 - The first build uses PostgreSQL-backed Mitu tables with a small seed set so the dashboards are useful immediately.
 - Mitu's fixed wake word is treated as product configuration, not a user-editable preference.
 - Device-sensitive capabilities are surfaced as explicit readiness states in Expo; wake-word detection, MediaPipe, and AccessibilityService require a native Android build and real-device permission flow.
+- The native Android project is kept separate from the Expo preview so Android Studio can own the production background-service build without changing the Replit preview workflow.
 
 ## Product
 
@@ -51,6 +54,7 @@ Mitu is a Bengali-first hands-free assistant ecosystem with a mobile companion a
 - Run `pnpm --filter @workspace/db run push` after changing the Drizzle schema.
 - The API is routed through `/api`; Expo uses the injected `EXPO_PUBLIC_DOMAIN` to reach the same service.
 - Replit can preview the Expo app, but the Android-native services are intentionally not claimed as complete until a native build and permissions are tested on device.
+- Android Gradle builds require a local Android SDK; GitHub Actions installs platform 35 and build tools 35.0.0 before running `./gradlew assembleDebug`.
 
 ## Pointers
 

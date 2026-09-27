@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --font-sans: var(--app-font-sans);
+  --font-mono: var(--app-font-mono);
+  --radius-lg: 0.8rem;
+  --radius-md: 0.6rem;
+  --radius-sm: 0.4rem;
+}
+
+:root {
+  --background: 242 28% 7%;
+  --foreground: 232 36% 93%;
+  --border: 237 22% 18%;
+  --input: 237 25% 16%;
+  --ring: 188 96% 55%;
+  --card: 242 24% 10%;
+  --card-foreground: 232 36% 93%;
+  --card-border: 237 22% 18%;
+  --primary: 188 96% 55%;
+  --primary-foreground: 242 28% 7%;
+  --secondary: 257 60% 61%;
+  --secondary-foreground: 236 30% 97%;
+  --muted: 240 20% 14%;
+  --muted-foreground: 230 15% 61%;
+  --accent: 290 84% 68%;
+  --accent-foreground: 242 28% 7%;
+  --destructive: 350 80% 65%;
+  --destructive-foreground: 0 0% 100%;
+  --sidebar: 243 31% 9%;
+  --sidebar-foreground: 232 36% 93%;
+  --sidebar-border: 237 22% 17%;
+  --sidebar-accent: 242 25% 15%;
+  --app-font-sans: 'Manrope', sans-serif;
+  --app-font-mono: 'DM Mono', monospace;
+  --shadow: 0 18px 60px rgba(0,0,0,.28);
+}
+
+* { box-sizing: border-box; }
+html { background: hsl(var(--background)); }
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 82% 0%, rgba(173, 92, 255, .12), transparent 26rem),
+    radial-gradient(circle at 40% 100%, rgba(25, 217, 239, .06), transparent 34rem),
+    hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--app-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+::selection { background: rgba(50, 226, 244, .28); color: #effdff; }
+
+.noise::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .035;
+  z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+.mono { font-family: var(--app-font-mono); }
+.display { font-family: 'Space Grotesk', sans-serif; }
+.fade-up { animation: fade-up .55s cubic-bezier(.22,1,.36,1) both; }
+.pulse-dot { animation: pulse-dot 2.3s ease-in-out infinite; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-dot { 0%,100% { opacity: .45; transform: scale(.92); } 50% { opacity: 1; transform: scale(1); } }
+.thin-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 8px; }
+.chart-grid { background-image: linear-gradient(to bottom, rgba(143,151,190,.1) 1px, transparent 1px); background-size: 100% 25%; }
+.skeleton { background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(240 22% 19%) 50%, hsl(var(--muted)) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
