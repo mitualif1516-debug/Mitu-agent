@@ -1,0 +1,1 @@
+- [Android build environment](android-build-environment.md) — MediaPipe artifacts come from Google Maven, and local AGP builds need a standard JDK because GraalVM can fail at jlink.
